@@ -78,4 +78,22 @@
     Lo probamos pero en lugar de mandarle plano le mandamos form-data solo de email y password. 
     (Que coincida con alguno ya guardado)
 
-# Creo el metodo Logout del AuthController y lo pruebo: min 15
+
+# Creo el metodo Logout del AuthController:
+    1# Protejo la ruta con el middleware('auth:sanctum)
+    2# Cuando lo pruebo le agrego en autorizations el token del usuario que hicimos login
+    3# Borro el token de usuario:
+         $user = request()->user(); //or Auth::user()
+            $user->tokens()->delete();
+
+# Continuar metodo pruebas
+# Facades y helpers de Auth:: , User:: 
+    $user= User::create([])                         //Nada nuevo, el modelo crea un registro nuevo.
+    $user->createToken('auth_token')->plainTextToken; //Crea un token y sanctum entiende que este $user esta autenticado
+    Auth::authenticate($user)                       // Authentica el usuario y/o retorna el usuario authenticado
+    $user= Auth::user();                            //El usuario authenticado, o Unauthenticated1
+    Auth::attempt(['email' => $email, 'password' => $password])  //True si el usuario existe y el password hasheado coincide con el hasheado guardado
+    return Auth::authenticate();                    // Retorna el usuario authenticado
+    return Auth::check();                           //Retorna 1 si hay usuario authenticado, solo se usa cuando no hay middleware sino no tiene sentido
+
+# Para mejorar, incluir sesiones y middleware personalizado
