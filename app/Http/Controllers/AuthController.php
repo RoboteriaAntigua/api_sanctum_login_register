@@ -99,6 +99,14 @@ class AuthController extends Controller
         //return Auth::authenticate(); // Retorna el usuario authenticado
         //return Auth::check(); //Retorna 1 si hay usuario authenticado, solo se usa cuando no hay middleware sino no tiene sentido
         
-        
+        $user = User::where('email','topo2@example.com')->firstOrfail(); //Similar a first() pero en caso de no encontrar nada arroja error en lugar de null.
+       $token = $user->createToken('auth_token')->plainTextToken;
+
+       return response()->json( [
+        'message'=>'hi',$user->name,
+        'acces_token'=> $token,
+        'token_type'=>'bearer',
+        'user'=>$user
+    ]);
     }
 }

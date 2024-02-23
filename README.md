@@ -1,4 +1,4 @@
-# API con laravel sanctum
+# API con laravel sanctum, STATELESS
     Para apis basadas en tokens. Ver personal_acces_token en migraciones
 
 # Instalar

@@ -27,4 +27,6 @@ Route::post('login', [AuthController::class,'login']);
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class,'logout']);
 
+//Para pruebas
 Route::middleware('auth:sanctum')->post('pruebas', [AuthController::class,'pruebas']);
+Route::get('login2', [AuthController::class,'pruebas']);
